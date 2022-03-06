@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Comptes</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+</head>
+<body class="d-flex flex-column min-vh-100">
+	<header th:replace="fragment/header :: header"></header>
+	<div class="container">
+	<form th:action="@{/saveCompteCourant}" method="post"  th:if="${compteC}" th:object="${compteC}" >
+			<div class="col-4" >
+			<div class="mb-3 ">
+				<label class="form-label " >codeCompte</label>
+				 <input type="text" th:field="*{codeCompte}"  class="form-control">
+			</div>
+			<div class="mb-3">
+				<label class="form-label">solde </label> 
+				<input type="text"  th:field="*{solde}" class="form-control">
+			</div>
+			<div class="mb-3">
+				<label class="form-label">decouvert </label>
+				 <input type="text" th:field="*{decouvert}"   class="form-control">
+			</div>
+			<div class="mb-3">
+				<label class="form-label">client</label> 
+				<input type="text" th:field="*{client}"  class="form-control">
+			</div>
+			<div class="mb-3">
+				<label class="form-label">employe</label> 
+				<input type="text" th:field="*{employe}"  class="form-control">
+			</div>
+				<div align="center">
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="button" class="btn btn-dark" onclick="CancelForm()">Cancel</button>
+				</div>
+			</div>
+		</form>
+		
+		<form th:action="@{/saveCompteEpargne}" method="post"  th:if="${compteE}"  th:object="${compteE}" >
+			<div class="m-5 col-4" >
+			<div class="mb-3 ">
+				<label class="form-label " >Code Compte (CC) :</label>
+				 <input type="text" th:field="*{codeCompte}"  class="form-control" required="required">
+			</div>
+			<div class="mb-3">
+				<label class="form-label"> Solde (DH) :</label> 
+				<input type="text"  th:field="*{solde}" class="form-control" required="required">
+			</div>
+			<div class="mb-3">
+				<label class="form-label"> Taux (DH):</label>
+				 <input type="text" th:field="*{taux}"   class="form-control" required="required">
+			</div>
+			<div class="mb-3">
+				<label class="form-label"> Client :</label> 
+				<input type="text" th:field="*{client}"  class="form-control" required="required">
+			</div>
+			<div class="mb-3">
+				<label class="form-label"> Employe :</label> 
+				<input type="text" th:field="*{employe}"  class="form-control" required="required">
+			</div>
+				<div align="center">
+				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="button" class="btn btn-dark" onclick="CancelForm()">Cancel</button>
+				</div>
+			</div>
+		</form>
+		
+	
+	</div>
+</body>
+</html>

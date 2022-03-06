@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Add empl khra</title>
+</head>
+
+<body>
+
+	<form th:action="@{/addEmpEm}" th:object="${emp}" method="POST">
+		<label>Nom du Employe:</label><br>
+		<input type="text" th:field="*{nomEmploye}"><br>
+
+		<label>code du Employe sup:</label><br>
+	<select th:field="*{employeSup}" >
+			 
+				<option th:each="empSup : ${listEmployes}" th:value="${empSup.codeEmploye}"  th:text="${empSup.nomEmploye}">
+				</option>
+			
+		</select> 
+		<input type="submit" value="Ajouter"> 
+	</form>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+	<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+	
+	<body>
+	
+
+<!--	<form  th:action="@{/affecterGroupeEmp}" th:object="${emp}"th:object="${grp}"  method="POST">
+	<label>code du Employe:</label><br>
+		<input type="text" th:field="*{codeEmploye}"><br>
+		
+			<label>code de groupe:</label><br>
+		<input type="text" th:field="*{codeGroupe}"><br>
+		
+		<input type="submit" value="Ajouter"> 
+	
+	</form >-->
+	<p>Aouter un groupe a l'employe:</p>
+	<p th:text="${emp}"></p >
+	<form th:action="@{/affecterGroupeEmp}"  method="POST" >
+		<input type="HIDDEN" name="codeEmploye" th:value="${codeEmploye}" ><br>
+		<select name="codeGroupe">
+		<span th:each="g:${grp}">
+		<option th:value="${g.codeGroupe}" th:text="${g.nomGroupe}"></option >
+		</span >
+		</select >
+			
+		
+		<input type="submit" value="Ajouter"> 
+	</form >
+	
+
+	
+	</body>
+	
+</html>	
+
+	
+	
+	
+	

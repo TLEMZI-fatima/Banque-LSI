@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Comptes</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+	<header th:replace="fragment/header :: header"></header>
+	<div class="col-md-6">
+		<div class="panel panel-primary" >
+			<div class="panel panel-header">Consulter un compte</div>
+			<div class="panel panel-body">
+				<form th:action="@{/consulterCompte}" method="post">
+					<label for="codeCompte">code du compte:</label><br>
+					<input type="text" name="codeCompte"><br><br>
+					<input type="submit" value="consulter">
+				</form>
+
+
+			</div>
+		</div>
+		
+ <div class="col-md-6" style="margin-right:-10px">
+		
+			<div class="panel panel-primary" th:if="${getComptes}">
+			<div class="panel panel-heading">Operation sur un compte</div>
+				<div class="panel panel-body">
+					<form th:action="@{/saveOperation}" method="POST">
+						<div >
+							<label>Compte: </label>
+							
+							<input style="display: none;" name="codeCompte" th:value="${getComptes.codeCompte}" /> 
+							<label th:text="${getComptes.codeCompte}"></label >
+						</div >
+						<div>
+							<input type="radio" name="typeOperation" value="VERS" checked="checked"  onchange="document.getElementById('forVirement').style.display='none'"/>
+							<label>Versement</label>
+							<input type="radio" name="typeOperation" value="RET"  onchange="document.getElementById('forVirement').style.display='none'"/>
+							<label>Retrait</label>
+							<input type="radio" name="typeOperation" value="VIR"  onchange="document.getElementById('forVirement').style.display='block'" />
+							<label>Virement</label>
+						</div>
+						<div id="forVirement" style="display:none">
+						<label>Vers:</label>
+						<input  type="text" name="codeCompte2"/>
+						</div >
+						
+						<div >
+						<label>Montant:</label>
+						<input  type="text" name="montant"/>
+						</div >
+						<div >
+						<label>Code Employe:</label>
+						<input  type="text" name="codeEmploye"/>
+						</div >
+						<button type="submit" class="btn btn-primary">Effectuer</button >
+					</form>  
+				</div>
+
+
+			
+
+	</div>
+ </div>
+
+<div class="panel panel-primary "  th:if="${getComptes}" >
+			  
+			  <div class="panel panel-heading">
+			  	Historique Des Operations
+			  </div>
+			  <div class="panel panel-body text-primary">
+			  <table class="table table-striped" th:if="${PagesOperations}">
+				  <thead>
+				    <tr >
+				      <th scope="col">N Op</th>
+				      <th scope="col">Type</th>
+				      <th scope="col">Montant</th>
+				      <th scope="col">Date</th>
+				      <th scope="col">Employe</th>
+				    </tr>
+				  </thead>
+				  
+				  <tbody >
+				    <tr th:each="op:${PagesOperations}" th:if="${op.employe.nomEmploye}">
+				    
+				      <td th:text="${op.numeroOperation}"></td>
+				      <td th:text="${op.class.simpleName}"></td>
+				      <td th:text="${op.montant}"></td>
+				      <td th:text="${op.dateOperation}"></td>
+					  <td th:text="${op.employe.nomEmploye}"></td> 
+						   
+				    </tr>
+				  </tbody>
+			</table>
+			</div>
+			  
+		</div>
+	</div>
+
+
+
+	<footer th:replace="fragment/footer :: footer"></footer>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.1/cjs/popper.min.js"
+		integrity="sha256-T3bYsIPyOLpEfeZOX4M7J59ZoDMzuYFUsPiSN3Xcc2M=" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+
+	<script>
+		function showDiv() {
+			document.getElementById("ajouterclient").style.display = "block";
+		}
+	</script>
+</body>
+
+</html>
